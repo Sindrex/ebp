@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.VBox?>
+<?import app.elements.PaneSwitchButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<BorderPane
+        id="sidebar-view"
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="app.users.UsersController">
+    <top>
+        <VBox>
+            <HBox alignment="TOP_CENTER" styleClass="title-bar">
+                <Label styleClass="title">Administer Users</Label>
+            </HBox>
+            <HBox styleClass="pane-switch-button-group">
+                <!-- XXX: change from *Tab to *Panel* please? -->
+                <PaneSwitchButton fx:id="customerViewTabButton" styleClass="pane-switch-button" text="Customers"/>
+                <PaneSwitchButton fx:id="adminViewTabButton" styleClass="pane-switch-button" text="Administrators"/>
+                </HBox>
+        </VBox>
+
+    </top>
+
+    <center>
+        <AnchorPane>
+            <HBox AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
+                <HBox alignment="CENTER">
+                    <ToolBar>
+                            <items>
+                                <Label style="-fx-font-size: 20">Search: </Label>
+                                <TextField fx:id="searchbar"></TextField>
+                                <Label fx:id="matches" style="-fx-font-size: 20;"></Label>
+                            </items>
+                    </ToolBar>
+                </HBox>
+            </HBox>
+            <HBox fx:id="customerView" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="45">
+                <TableView fx:id="userTable" editable="true" HBox.hgrow="ALWAYS">
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                    <columns>
+                        <TableColumn text="ID" />
+                        <TableColumn text="Username" />
+                        <TableColumn text="Reset Password"/>
+                    </columns>
+                </TableView>
+            </HBox>
+
+            <HBox fx:id="adminView" visible="false" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                <TableView fx:id="adminTable" editable="true" HBox.hgrow="ALWAYS">
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                    <columns>
+                        <TableColumn text="ID"/>
+                        <TableColumn text="Username"/>
+                        <TableColumn text="Reset Password"/>
+                    </columns>
+                </TableView>
+            </HBox>
+        </AnchorPane>
+    </center>
+</BorderPane>

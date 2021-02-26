@@ -1,0 +1,47 @@
+UPDATE bike SET total_km = 10, total_trips = 3 WHERE bike_id%1 = 0;
+UPDATE bike SET total_km = 54, total_trips = 10 WHERE bike_id%2 = 0;
+UPDATE bike SET total_km = 300, total_trips = 100 WHERE bike_id%3 = 0;
+UPDATE bike SET total_km = 71, total_trips = 23 WHERE bike_id%5 = 0;
+UPDATE bike SET total_km = 500, total_trips = 40 WHERE bike_id%9 = 0;
+UPDATE bike SET total_km = 20, total_trips = 6 WHERE bike_id%45 = 0;
+
+UPDATE bike_status SET total_km = 5, total_trips = 2 WHERE bike_id%1 = 0;
+UPDATE bike_status SET total_km = 35, total_trips = 8 WHERE bike_id%2 = 0;
+UPDATE bike_status SET total_km = 260, total_trips = 88 WHERE bike_id%3 = 0;
+UPDATE bike_status SET total_km = 62, total_trips = 20 WHERE bike_id%5 = 0;
+UPDATE bike_status SET total_km = 499, total_trips = 39 WHERE bike_id%9 = 0;
+UPDATE bike_status SET total_km = 10, total_trips = 5 WHERE bike_id%45 = 0;
+
+UPDATE docking_station SET power_usage = 500 WHERE station_id = 5;
+
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-03-06", "Paint bad", 1);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-03-06", "Broken", 12);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-03-06", "No steering", 123);
+
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-02-06", "Brakes too powerful", 2);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-02-06", "New paint", 23);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-02-06", "Gear-chain", 234);
+
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-01-06", "Oil", 3);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-01-06", "???", 34);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2018-01-06", "Tires", 345);
+
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2017-12-06", "Everything", 4);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2017-12-06", "No gps", 45);
+INSERT INTO repair (request_date, description, bike_id) VALUES ("2017-12-06", "Too heavy", 456);
+
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (9, "2018-03-010", 350, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (10, "2018-03-010", 1000, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (11, "2018-03-010", 50, "Fix.");
+
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (12, "2018-02-010", 550, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (13, "2018-02-010", 123, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (14, "2018-02-010", 1024, "Fix.");
+
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (15, "2018-01-010", 2048, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (16, "2018-01-010", 890, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (17, "2018-01-010", 450, "Fix.");
+
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (18, "2017-12-010", 350, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (19, "2017-12-010", 666, "Fix.");
+INSERT INTO repair_return (repair_id, return_date, price, description) VALUES (20, "2017-12-010", 1234, "Fix.");

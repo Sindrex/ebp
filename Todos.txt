@@ -1,0 +1,39 @@
+Image on login?										
+
+Optimize statistics (sort with SQL!)
+
+Main Report	on it
+User manual	
+
+Update Project Structure in wiki (dependencies)
+
+Fix:
+Bike-delete ???
+Date added in type
+Statistics are SLOW
+
+
+Det som skal leveres:
+-Main report
+-Attachments:
+	-Collab Agreement
+	-Project Plan (check it out)
+	-Link to timesheet
+	-Meeting invitations
+	-Meeting reports
+	-Vision Document
+	-Link to GitLab Wiki with:
+		-Vision Doc (pdf)
+		-Reqs:
+			-UseCaseDiagram
+				-UseCaseText
+			-DomainModel
+			-SequenceDiagrams
+			-Wireframes
+		-System Doc
+			-Project Structure
+			-Class diagram
+			-Database Model
+			-Source code (javadoc)
+			-Install Guide
+			-User Manual

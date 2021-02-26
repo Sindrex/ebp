@@ -1,0 +1,14 @@
+image: openjdk:9-jdk
+
+
+pages:
+    script: 
+    - javadoc -private -d public/main/ -sourcepath src/main/java/ -subpackages app:db:logging:managers:objects:simulation -cp ".:lib/*" -tag apiNote -javafx -author
+    - javadoc -private -d public/test/ -sourcepath src/test/java/:src/main/java -subpackages app:db:logging:managers:objects:simulation -cp ".:lib/*:out/*.jar/*" -tag apiNote -javafx -author 
+    - cp -r .public/* public/
+    artifacts:
+        paths:
+        - public
+    only:
+    - javadocs
+    - intermediate

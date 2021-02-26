@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import app.elements.PaneSwitchButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<BorderPane
+        id="sidebar-view"
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="app.statistics.StatisticsController" >
+    <top>
+        <VBox>
+            <HBox styleClass="title-bar" alignment="TOP_CENTER">
+                <Label styleClass="title">Statistics</Label>
+            </HBox>
+            <HBox styleClass="pane-switch-button-group">
+                <!-- XXX: change from *Tab to *Panel* please? -->
+                <PaneSwitchButton fx:id="bikesTabButton" styleClass="pane-switch-button" text="Bikes"/>
+                <PaneSwitchButton fx:id="repairTabButton" styleClass="pane-switch-button" text="Repairs"/>
+                <PaneSwitchButton fx:id="docksTabButton" styleClass="pane-switch-button" text="Docks"/>
+                <PaneSwitchButton fx:id="economyTabButton" styleClass="pane-switch-button" text="Economy"/>
+            </HBox>
+            <HBox alignment="TOP_LEFT">
+                <ComboBox fx:id="bikeTypes"/>
+                <ComboBox fx:id="year"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <AnchorPane fx:id="paneHolder">
+            <!--
+            <HBox spacing="20" visible="false" fx:id="bikesBox" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+                  AnchorPane.leftAnchor="0">
+                <TabPane HBox.hgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Total trips">
+                            <content>
+                                <LineChart fx:id="totalTripsGraph" title="Trips" prefHeight="650" prefWidth="500" styleClass="title">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" label="Month"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" label="Trips"/>
+                                    </yAxis>
+                                </LineChart>
+                            </content>
+                        </Tab>
+                        <Tab text="km per trip">
+                            <content>
+                                <LineChart fx:id="kmPerTripGraph" title="Kilometer per trip" prefHeight="650" prefWidth="500" styleClass="title">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" label="Months"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" label="km/Trip"/>
+                                    </yAxis>
+                                </LineChart>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </HBox>
+            -->
+            <HBox spacing="20" visible="false" fx:id="bikesBox" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+                  AnchorPane.leftAnchor="0">
+                <Region HBox.hgrow="ALWAYS"/>
+                <LineChart fx:id="totalTripsGraph" title="Total Trips" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label=""/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="Trips"/>
+                    </yAxis>
+                </LineChart>
+                <LineChart fx:id="kmPerTripGraph" title="Kilometer per trip" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label=""/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="km/Trip"/>
+                    </yAxis>
+                </LineChart>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox spacing="20" visible="false" fx:id="repairsBox" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+                  AnchorPane.leftAnchor="0">
+                <Region HBox.hgrow="ALWAYS"/>
+                <LineChart fx:id="totalRepairsGraph" title="Total Repairs" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label="" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="#Repairs" />
+                    </yAxis>
+                </LineChart>
+                <LineChart fx:id="repairsPerBikeGraph" title="Repairs per bike" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label="" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="#Repairs" />
+                    </yAxis>
+                </LineChart>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox spacing="40" visible="false" alignment="CENTER" fx:id="dockingStationBox" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+                  AnchorPane.leftAnchor="0">
+                <Region HBox.hgrow="ALWAYS"/>
+                <LineChart fx:id="dockPowerUsageGraph" title="Total Power Usage" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label="" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="Kilowatts (kW)" />
+                    </yAxis>
+                </LineChart>
+                <LineChart fx:id="dockAveragePowerUsageGraph" title="Average Power Usage" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label="" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="Kilowatts (kW)" />
+                    </yAxis>
+                </LineChart>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="40" visible="false" fx:id="economyBox" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+                  AnchorPane.leftAnchor="0">
+                <Region HBox.hgrow="ALWAYS"/>
+                <LineChart fx:id="bikeCostGraph" title="Bike Purchase Cost" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label="" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="Cost (NOK)" />
+                    </yAxis>
+                </LineChart>
+                <LineChart fx:id="repairCostGraph" title="Repair Costs" styleClass="title">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" label="" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" label="Cost (NOK)" />
+                    </yAxis>
+                </LineChart>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </AnchorPane>
+    </center>
+</BorderPane>
+
+
+
+
+<!--
+<VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+<padding>
+    <Insets left="50" />
+</padding>
+<HBox>
+    <LineChart fx:id="powerGraph" BorderPane.alignment="CENTER" title="Best Graph" styleClass="title" prefWidth="400" prefHeight="650">
+        <xAxis>
+            <CategoryAxis side="BOTTOM" label="Month"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis side="LEFT" label="Kilowatt (kW)" />
+        </yAxis>
+    </LineChart>
+
+    <LineChart title="Trips" prefWidth="400" prefHeight="650">
+        <xAxis>
+            <CategoryAxis side="BOTTOM" label="Month"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis side="LEFT" label="Trips"/>
+        </yAxis>
+    </LineChart>
+
+    <LineChart title="Kilometer per trip" prefWidth="400" prefHeight="650">
+        <xAxis>
+            <CategoryAxis side="BOTTOM" label="Months"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis side="LEFT" label="km/Trip"/>
+        </yAxis>
+    </LineChart>
+</HBox>
+</VBox>-->

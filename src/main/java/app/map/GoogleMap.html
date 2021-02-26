@@ -1,0 +1,282 @@
+<!-- Based upon sources from: http://fxexperience.com/2011/05/maps-in-javafx-2-0/ and Google's developer guides. -->
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+    <style type="text/css">
+        html { height: 100% }
+        body { height: 100%; margin: 0px; padding: 0px }
+        #map_canvas { height: 100%; background-color: #666970; }
+
+        a[href^="http//maps.google.com/maps"]{display:none !important}
+        a[href^="https//maps.google.com/maps"]{display:none !important}
+
+        .gmnoprint a, .gmnoprint span, .gm-style-cc {
+            display:none;
+        }
+        .gmnoprint div {
+            background:none !important;
+        }
+    </style>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+    </script>
+    <script type="text/javascript">
+        /* The window.onload = ... and showAPIError() functions are modified from code at
+         * https://gist.github.com/lczx/268eb7cd7b079af1bd17
+         */
+        window.onload = function() {
+            if (!window.bridge || !window.bridge.onMapInit) {
+                showAPIError();
+            } else {
+                initialize();
+                bridge.onMapInit();
+            }
+        };
+
+        function showAPIError() {
+            var node = document.createElement("div");
+            node.style.backgroundColor = 'rgba(255, 0, 0, .7)';
+            node.style.textAlign = 'left';
+            node.style.padding = '5px 10px';
+            node.innerHTML = '<b>API not found</b>, please open this page from the provided JavaFX app.';
+            document.body.insertBefore(node, document.body.firstChild);
+        }
+
+        function initialize() {
+            // Overload console.load() to pass back to the JavaFx application.
+            var console = {};
+            console.log = function log(s, args){
+              bridge.log(s);
+            };
+
+            // Store a list of markers.
+            document.markers = [];   // list of markers
+            document.markerIds = {}; // marker id -> marker (with matching id)
+            document.infoWindows = {}; // marker id -> marker's info window
+
+            // Create map
+            var center = new google.maps.LatLng(63.4278489, 10.3938181);
+            var myOptions = {
+                zoom: 11,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+                backgroundColor: "#666970",
+                navigationControl: false,
+                streetViewControl: false,
+                disableDefaultUI: true,
+                mapTypeControl: false,
+                mapTypeControlOptions: {
+                    mapTypeIds: ['styled_maps']
+                }
+            };
+
+            document.geocoder = new google.maps.Geocoder();
+            document.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            // Removes unnecessary icons for POI's like universities, schools etc...
+            var styles = [
+                {
+                    featureType: 'poi',
+                    elementType: 'labels',
+                    stylers: [{visibility: 'off'}]
+                },
+                {
+                    featureType: 'transit',
+                    elementType: 'labels.icon',
+                    stylers: [{visibility: 'off'}]
+                }
+            ];
+            // Add to map types and enable it.
+            var styledMapType = new google.maps.StyledMapType(styles);
+            document.map.mapTypes.set('styled_map', styledMapType);
+            document.map.setMapTypeId('styled_map');
+
+            /*
+             * Functions.
+             */
+            document.setZoom = function setZoom(zoomLevel) {
+                if (zoomLevel <= 20 && zoomLevel > 0) document.map.setZoom(zoomLevel);
+            };
+
+            document.goToLocation = function goToLocation(searchString) {
+                document.geocoder.geocode( {'address': searchString}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        document.map.setCenter(results[0].geometry.location);
+                    } else {
+                        console.log("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            };
+
+            /* Show (open) a marker info window if any is stored for
+             * marker with the given id. */
+            document.showMarkerInfoWindow = function(id) {
+                console.log('showing marker info window for marker with id: ' + id);
+                var marker = document.markers[id];
+                var infoWindow = document.infoWindows[id];
+                infoWindow.open(document.map, marker);
+            };
+
+            document.updateMarkerInfo = function(id, info) {
+                var marker = document.markerIds[id];
+                if (marker != null) {
+                    var infoWindow = document.infoWindows[id];
+                    if (infoWindow != null) {
+                        infoWindow.setContent(info);                          // Info
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            document.updateMarker = function(id, lat, lng, label, icon, draggable, info) {
+                var marker = document.markerIds[id];
+                var infoWindow = document.infoWindows[id];
+
+                marker.setPosition(new google.maps.LatLng(lat, lng)); // Position
+                marker.setIcon(icon);                                 // Icon.
+                marker.setLabel(label);                               // Label.
+                marker.setDraggable(draggable);                       // Draggable
+                infoWindow.setContent(info);                          // Info
+            };
+
+            /* Adds a new marker to the map of markers using the given parameters.
+               Also adds to infoWindow map if info parameter is non-null. */
+            document.addMarker = function(id, lat, lng, label, icon, draggable, info) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: document.map,
+                    label: label,
+                    icon: icon,
+                    draggable: draggable
+                });
+
+                //console.log('id: ' + lat + ', ' + lng + ', ' + label + ", " + icon + ", " + draggable + ", " + info);
+
+                // Add info window if content was provided.
+                if (info != null) {
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: info
+                    });
+                    document.infoWindows[id] = infoWindow;
+                    marker.addListener('click', function() {
+                        infoWindow.open(document.map, marker);
+                        bridge.onMarkerClick(id);
+                        console.log("Marker: " + id + " clicked");
+                    });
+                } else {
+                    marker.addListener('click', function() {
+                        bridge.onMarkerClick(id);
+                        console.log("Marker: " + id + " clicked");
+                    });
+                }
+
+                // Drag
+                if (draggable) {
+                    google.maps.event.addListener(marker, 'dragstart', function() {
+                        bridge.onMarkerDragged(id);
+                        document.log += "Marker " + id + " dragstart";
+                    });
+
+                    google.maps.event.addListener(marker, "dragend", function() {
+                        bridge.onMarkerDragged(id);
+                        console.log("Marker " + id + " dragend!")
+                    });
+
+                    //google.maps.event.addListener(marker, "position_changed", function() {
+                    //    bridge.onMarkerDragged(id);
+                    //});
+                }
+
+                document.markers.push(marker);
+                document.markerIds[id] = marker;
+                return document.markers.length-1;
+            };
+
+            // Removes marker and removes all relevant stored information.
+            document.removeMarker = function(id) {
+                var marker = document.markerIds[id];
+                var indexInMarkers = document.markers.indexOf(marker);
+                //document.markers[indexInMarkers] = null; // remove reference from list by setting it to null
+                document.markers.splice(indexInMarkers, 1); // removes the marker from the list of markers.
+                console.log("Removing marker: " + id);
+                if (marker != null) {
+                    marker.setMap(null);
+                }
+                delete document.markerIds[id];
+                delete document.infoWindows[id];
+                return true;
+            };
+
+            // Roves the marker given by id; id, to the new position..
+            document.moveMarker = function(id, lat, lng) {
+                var marker = document.markerIds[id];
+                if (marker == null) {
+                    return false;
+                }
+                console.log("Moving marker: " + id + " to " + lat + ", " + lng);
+                marker.setPosition(new google.maps.LatLng(lat, lng));
+                return true;
+            };
+
+            // changes the icon path of the marker given by id..
+            document.changeIconPath = function(id, iconPath) {
+                var marker = document.markerIds[id];
+                if (marker == null) {
+                    return false;
+                }
+                console.log("Updating icon path for marker:" + id);
+                marker.setIcon(iconPath);
+                //marker.setPosition(new google.maps.LatLng(lat, lng));
+                return true;
+            };
+
+            // Click listener
+            document.map.addListener('click', function(e) {
+                // Calls back to JavaFX.
+                bridge.onMapClick(e.latLng.lat(), e.latLng.lng());
+                bridge.log("Map clicked");
+            });
+
+            // Sets the map on all markers in the array.
+            document.setMapOnAll = function setMapOnAll(map) {
+                for (var i = 0; i < document.markers.length; i++) {
+                    document.markers[i].setMap(map);
+                }
+            };
+
+            // Removes the markers from the map, but keeps them in the array.
+            document.clearMarkers = function clearMarkers() {
+                document.setMapOnAll(null);
+            };
+
+            // Shows any markers currently in the array.
+            document.showMarkers = function showMarkers() {
+                document.setMapOnAll(document.map);
+            };
+
+            // Deletes all markers in the array by removing references to them.
+            document.deleteMarkers = function deleteMarkers() {
+                document.clearMarkers();
+                document.markers = [];
+                //return true;
+            };
+
+            // Pan to the given position
+            document.panTo = function panTo(lat, lng) {
+                document.map.panTo(new google.maps.LatLng(lat, lng));
+                return true;
+            };
+
+            document.getMarkerPos = function getMarkerPos(id) {
+                var marker = document.markers[id];
+                var pos = marker.getPosition();
+                console.log("getMarkerPos(" + id + "): " + pos.lat() + ", " + pos.lng());
+                return {lat: pos.lat(), lng: pos.lng()};
+            };
+        }
+    </script>
+</head>
+<!-- <body onload="initialize()"> -->
+<div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+</html>

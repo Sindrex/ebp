@@ -1,0 +1,213 @@
+/**
+ * @author Joergen Bele Reinfjell
+ * @author Aleksander Johansen
+ * @author Sindre Thomassen
+ */
+
+@font-face {
+    src: url("Pretendo.ttf");
+}
+
+/*
+Label {
+    -fx-background-color: #000000;
+    }
+ */
+
+/* Sidebar */
+#sidebarGridPane {
+    -fx-background-color: rgba(120, 124, 125, 0.47);
+}
+
+.sidebar-switch-button-group {
+    -fx-vgap: 40;
+    -fx-min-height: 40;
+    -fx-spacing: 4;
+    -fx-alignment: CENTER;
+}
+.sidebar-switch-button {
+    -fx-max-width: Infinity;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-background-color: black;
+}
+
+.sidebar-switch-button:selected {
+    -fx-font-size: 14;
+    -fx-background-color: #306FFF;
+}
+
+.sidebar-switch-button:hover {
+    -fx-font-size: 14;
+    -fx-background-color: #3394d5;
+    -fx-text-fill: white;
+    -fx-shadow-highlight-color: transparent;
+}
+
+
+/* Buttons. */
+Button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 2;
+}
+
+#action-button {
+    -fx-font-size: 20;
+}
+
+Button:selected {
+    -fx-background-color: grey;
+}
+
+Button:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+    -fx-shadow-highlight-color: transparent;
+}
+
+/* Text- and password fields */
+TextField {
+    -fx-font-size: 18;
+/*    -fx-pref-width: 400; */
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+TextField:focused {
+    /* -fx-border-color: #a270a7; */
+}
+
+PasswordField {
+    -fx-font-size: 18;
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+PasswordField:focused {
+    /* -fx-border-color: #a270a7; */
+}
+
+.input-box-label {
+    -fx-font-size: 22;
+}
+
+.GridPane {
+
+}
+
+#bottom-banner {
+    -fx-pref-width: Infinity;
+    -fx-font-size: 20;
+/*    -fx-font-family: "Droid Sans Mono"; */
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+    /* from: https://docs.oracle.com/javafx/2/text/jfxpub-text.htm */
+}
+
+/* Title */
+.title {
+    -fx-font-size: 30;
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
+
+.title-bar {
+ /*   -fx-background-color: #85478B; */
+    /*   -fx-background-color: #85478B; */
+    -fx-background-color: rgba(135, 140, 141, 0.47);
+}
+
+.sidebar-title {
+    -fx-font-family: Pretendo;
+    -fx-text-fill: red;
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-font-size: 20;
+    -fx-alignment: CENTER;
+    -fx-fill: #f8fdff;
+}
+
+
+/* Pane switch button */
+.pane-switch-button {
+    -fx-font-size: 14;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-pref-width: 80;
+}
+
+.pane-switch-button:selected {
+    -fx-font-size: 14;
+    -fx-background-color: #306FFF;
+}
+
+.pane-switch-button:hover {
+    -fx-font-size: 14;
+    -fx-background-color: #3394d5;
+    -fx-text-fill: white;
+    -fx-shadow-highlight-color: transparent;
+}
+
+.pane-switch-button-group {
+    -fx-vgap: 40;
+    -fx-min-height: 40;
+    -fx-spacing: 4;
+    -fx-alignment: CENTER;
+
+    /*
+    -fx-background-color: #4D0F53;
+    */
+    -fx-background-color: #787c7d;
+}
+
+.subTitle{
+    -fx-font-size: 20;
+}
+
+.infoText{
+    -fx-font-size: 17;
+}
+
+.medText{
+    -fx-font-size: 22;
+}
+
+.medButton{
+    -fx-font-size: 15;
+}
+
+.deleteButton{
+    -fx-font-size: 20;
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.restoreButton{
+    -fx-font-size: 20;
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.new-button {
+    -fx-font-size: 25;
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.refresh-button {
+    -fx-font-size: 25;
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}
+
+PaneSwitchButton {
+    -fx-min-width: 150px;
+}

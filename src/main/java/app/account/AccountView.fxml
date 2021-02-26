@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<BorderPane id="sidebar-view" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="app.account.AccountController">
+    <top>
+        <HBox alignment="CENTER">
+            <padding>
+                <Insets top="20" />
+            </padding>
+            <Label text="Account Settings" styleClass="title">
+            </Label>
+        </HBox>
+    </top>
+
+    <center>
+        <BorderPane>
+            <center>
+                <AnchorPane>
+                    <HBox alignment="CENTER" visible="true" fx:id="accInfo">
+                        <Region minWidth="50" />
+                        <GridPane HBox.hgrow="ALWAYS" vgap="40" hgap="50" alignment="TOP_CENTER" styleClass="GridPane" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                            <Region minHeight="80" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                            <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" alignment="CENTER">
+                                <Label text="User Information" styleClass="title" />
+                            </HBox>
+                            <Label text="Username:" minWidth="120" styleClass="medText" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                            <Label fx:id="usernameLabel" text='Insert username here' styleClass="medText" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        </GridPane>
+                        <Region minWidth="100" />
+                        <Separator orientation="VERTICAL"/>
+                        <Region minWidth="75" />
+                        <GridPane HBox.hgrow="ALWAYS" alignment="TOP_CENTER" styleClass="GridPane" hgap="50" vgap="30">
+                            <Region minHeight="80" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                            <HBox GridPane.rowIndex="1" GridPane.columnSpan="2" alignment="CENTER">
+                                <Label text="Change password" alignment="CENTER" styleClass="title"/>
+                            </HBox>
+                            <Label text="Old Password:" styleClass="subTitle" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                            <PasswordField fx:id="oldPasswordField" promptText="Old Password" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300" prefHeight="50" />
+                            <Label text="New Password:" styleClass="subTitle" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                            <PasswordField fx:id="newPasswordField" GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="New Password" prefWidth="300" prefHeight="50" />
+                            <Label text="Confirm New Password:" minWidth="220" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="subTitle" />
+                            <PasswordField fx:id="newPasswordField2" GridPane.rowIndex="4" GridPane.columnIndex="1" promptText="Confirm Password" prefWidth="300" prefHeight="50" />
+                            <Label fx:id="feedbackMessage" GridPane.rowIndex="6" GridPane.columnSpan="2" styleClass="medText" visible="false"/>
+                            <HBox GridPane.rowIndex="5" GridPane.columnIndex="1" alignment="CENTER">
+                                <Button fx:id="changePasswordButton" text="Change password" minWidth="50" prefHeight="50" prefWidth="200" styleClass="subTitle"/>
+                            </HBox>
+                        </GridPane>
+                        <Region minWidth="40" />
+                    </HBox>
+
+                    <GridPane fx:id="createAccountPanel" alignment="TOP_CENTER" vgap="15" visible="false" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0">
+                        <Region minHeight="20" />
+                        <Label text="CREATE ADMIN ACCOUNT" styleClass="title" minWidth="300" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                        <HBox GridPane.rowIndex="3" GridPane.columnSpan="2" alignment="CENTER">
+                            <Label text="Username:" styleClass="medText" />
+                        </HBox>
+                        <TextField fx:id="createAccountName" minWidth="200" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                        <HBox GridPane.rowIndex="5" GridPane.columnSpan="2" alignment="CENTER">
+                            <Label text="Password:" styleClass="medText" />
+                        </HBox>
+                        <PasswordField fx:id="createAccountPass" minWidth="200" GridPane.rowIndex="6" GridPane.columnIndex="0" minHeight="40" />
+                        <HBox GridPane.rowIndex="7" GridPane.columnSpan="2" alignment="CENTER">
+                            <Label text="Confirm password:" styleClass="medText" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+                        </HBox>
+                        <PasswordField fx:id="createAccountPass2" minWidth="200" GridPane.rowIndex="8" GridPane.columnIndex="0" />
+                        <HBox GridPane.rowIndex="10" GridPane.columnSpan="2" alignment="CENTER">
+                            <Button fx:id="createAccount" text="Create" styleClass="medText" minWidth="200" />
+                        </HBox>
+                        <HBox GridPane.rowIndex="12" GridPane.columnSpan="2" alignment="CENTER">
+                        <Label fx:id="feedbackMessageAccount" GridPane.rowIndex="9" GridPane.columnSpan="2" GridPane.columnIndex="0" styleClass="medText" visible="false"/>
+                        </HBox>
+                    </GridPane>
+                </AnchorPane>
+            </center>
+
+            <bottom>
+                <HBox prefHeight="40">
+                    <Button text="Create New Account" fx:id="createAccountButton" prefWidth="250" minWidth="250" prefHeight="60" styleClass="subTitle"/>
+                    <Region minWidth="600" HBox.hgrow="ALWAYS" />
+                    <Button text="Back" fx:id="backButton" styleClass="subTitle" prefWidth="120" prefHeight="60" visible="false" />
+                    <Region minWidth="20" HBox.hgrow="ALWAYS" />
+                    <padding>
+                        <Insets left="20" bottom="40"/>
+                    </padding>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </center>
+</BorderPane>

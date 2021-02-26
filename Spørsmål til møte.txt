@@ -1,0 +1,7 @@
+-Hva mener du med at sluttbrukere ikke må ha konto?
+-For å få karakter A må vi ha flere "use case" og "sequence documents"?
+-
+-Administer users is administer admin users
+-"Edit bikes", hva menes? Hva skal kunne endres?
+-SKal VI LAGE et system som sender ut emails til (non-existant) bikebrukere?
+-

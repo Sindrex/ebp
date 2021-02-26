@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import app.elements.PaneSwitchButton?>
+<?import app.map.GoogleMapView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="sidebar-view" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="app.dockingstation.DockingStationController">
+    <BorderPane fx:id="mainPage" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+        <top>
+            <VBox>
+                <HBox styleClass="title-bar" alignment="CENTER">
+                    <Label styleClass="title" text="Administer Docking Stations"/>
+                </HBox>
+                <HBox styleClass="pane-switch-button-group" alignment="CENTER">
+                    <PaneSwitchButton fx:id="overViewMapButton" styleClass="pane-switch-button" mnemonicParsing="false" text="Overview"/>
+                    <PaneSwitchButton fx:id="addButton" styleClass="pane-switch-button" mnemonicParsing="false" text="Add"/>
+                    <PaneSwitchButton fx:id="statusButton" styleClass="pane-switch-button" mnemonicParsing="false" text="Status List"/>
+                </HBox>
+            </VBox>
+        </top>
+
+        <center>
+            <AnchorPane>
+                <HBox fx:id="addPanel" alignment="CENTER" spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <GridPane hgap="50" minHeight="-Infinity" minWidth="-Infinity" vgap="40" alignment="CENTER_LEFT">
+
+                        <Label styleClass="input-box-label" text="Latitude" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="latitudeTextField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label styleClass="input-box-label" text="Longitude" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="longitudeTextField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label styleClass="input-box-label" text="Capacity" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Spinner fx:id="capacitySpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="true">
+                            <valueFactory>
+                                <!-- xxx - this seems like a bad way of setting the maximum value... -->
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="10000" initialValue="10" />
+                            </valueFactory>
+                        </Spinner>
+
+                        <Button text="Add station" fx:id="addStationButton" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+                    </GridPane>
+
+                    <HBox alignment="CENTER">
+                        <GoogleMapView fx:id="addDockMapView" visible="false"/>
+                    </HBox>
+
+                </HBox>
+
+                <VBox fx:id="statusPanel" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                        <columns>
+                            <TableColumn text="Name/ID" prefWidth="150"/>
+                            <TableColumn text="Latest Power Usage (W)" prefWidth="150" />
+                            <TableColumn text="Number of Bikes" prefWidth="150" />
+                            <TableColumn text="Capacity" prefWidth="150" />
+                            <TableColumn text="Details" prefWidth="150" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <HBox alignment="CENTER" fx:id="overViewMapPanel" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+                    <GoogleMapView HBox.hgrow="ALWAYS" fx:id="overviewMapView" visible="false"/>
+                </HBox>
+            </AnchorPane>
+        </center>
+    </BorderPane>
+
+    <fx:include source="DockingDetails.fxml" fx:id="dockingDetails" visible="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
+    AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"/>
+</AnchorPane>

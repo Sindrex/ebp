@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane
+            id="loginView"
+            fx:controller="app.login.LoginController"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@LoginView.css, @../css/AdminApp.css">
+
+    <top>
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER" styleClass="title-bar">
+                <Label styleClass="title">Admin login</Label>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" visible="true">
+            <HBox> <Label styleClass="choice-label">Username</Label>            </HBox>
+            <HBox> <TextField id="choiceLabel" fx:id="usernameTextField"/>      </HBox>
+            <HBox> <Region VBox.vgrow="ALWAYS" prefHeight="60"/>                </HBox>
+            <HBox> <Label styleClass="choice-label">Password</Label>            </HBox>
+            <HBox> <PasswordField fx:id="passwordField"/>                       </HBox>
+            <HBox> <Region VBox.vgrow="ALWAYS" prefHeight="60"/>                </HBox>
+            <HBox>
+                <Button fx:id="loginButton" styleClass="action-button" style="-fx-font-size: 30" text="Login" prefWidth="150" prefHeight="75"
+                        onAction="#loginButtonAction">
+                </Button>
+            </HBox>
+            <Label fx:id="error" text="ERROR" styleClass="title" style="-fx-text-fill: red" visible="false" />
+        </VBox>
+    </center>
+
+    <bottom>
+        <Label id="bottom-banner">(C) (R) ™ NaNtendo 2018 Co. Inc. A/S</Label>
+    </bottom>
+</BorderPane>

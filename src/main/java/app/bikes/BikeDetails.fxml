@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import app.elements.PaneSwitchButton?>
+<BorderPane xmlns="http://javafx.com/javafx" visible="false" xmlns:fx="http://javafx.com/fxml" fx:controller="app.bikes.BikeDetailsController" fx:id="mainPage">
+    <top>
+        <VBox spacing="0">
+            <HBox styleClass="title-bar" alignment="TOP_CENTER">
+                <Label styleClass="title">Bike Details</Label>
+            </HBox>
+            <HBox styleClass="pane-switch-button-group" fx:id="switchGroup">
+                <PaneSwitchButton fx:id="detailsTabButton" styleClass="pane-switch-button" text="Details"/>
+                <PaneSwitchButton fx:id="historyTabButton" styleClass="pane-switch-button" text="History"/>
+            </HBox>
+            <Region maxHeight="20" minHeight="20" prefHeight="20" />
+            <HBox>
+                <padding>
+                    <Insets left="0" right="0" top="0" bottom="10"/>
+                </padding>
+                <Button fx:id="backButton" text="Back" styleClass="medButton" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="deleteButton" text="Delete" styleClass="medButton" style="-fx-color: red"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <Separator/>
+            <GridPane fx:id="titleGrid" vgap="0" hgap="100">
+                <Label text="Specifications:" styleClass="title" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Current Status:" styleClass="title" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
+            </GridPane>
+        </VBox>
+    </top>
+    <center>
+        <AnchorPane>
+            <HBox alignment="CENTER" fx:id="detailsPage" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+                <GridPane vgap="15" hgap="10" fx:id="detailGridPane">
+                    <Label text="Bike ID: " styleClass="medText" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                    <Label text="Insert Test Data" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="medText" style="-fx-text-fill: blue;"/>
+
+                    <Label text="Type: " styleClass="medText" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                    <Label text="Insert Test Data" fx:id="typeLabel" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="medText" style="-fx-text-fill: blue;"/>
+
+                    <ComboBox fx:id="editTypeCombo" prefWidth="150" visible="false" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                    <Button fx:id="editTypeButton" text="Edit" onAction="#editType" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="medButton" />
+
+                    <Label text="Make: " styleClass="medText" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                    <Label fx:id="brandLabel" text="Insert Test Data" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="medText" style="-fx-text-fill: blue;"/>
+
+                    <TextField fx:id="editBrandBox" GridPane.rowIndex="3" GridPane.columnIndex="2" visible="false"/>
+                    <Button fx:id="editBrandButton" onAction="#editBrand" text="Edit" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="medButton" alignment="CENTER_LEFT" />
+
+                    <Label text="Price: " styleClass="medText" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+                    <Label text="Insert Test Data" GridPane.rowIndex="4" GridPane.columnIndex="2" styleClass="medText" style="-fx-text-fill: blue;" />
+
+                    <Label text="Date Purchased: " styleClass="medText" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+                    <Label text="Insert Test Data" GridPane.rowIndex="5" GridPane.columnIndex="2" styleClass="medText" style="-fx-text-fill: blue;" />
+
+
+
+                    <Label text="Activity: " styleClass="medText" GridPane.rowIndex="1" GridPane.columnIndex="5" />
+                    <Label text="Insert Data Here" styleClass="medText" GridPane.rowIndex="1" GridPane.columnIndex="6" style="-fx-text-fill: blue;"/>
+
+                    <Label text="User/Dock ID: " styleClass="medText" GridPane.rowIndex="2" GridPane.columnIndex="5" />
+                    <Label text="Insert Data Here" styleClass="medText" GridPane.rowIndex="2" GridPane.columnIndex="6" style="-fx-text-fill: blue;"/>
+
+                    <Label text="Charge (%): " styleClass="medText" GridPane.rowIndex="3" GridPane.columnIndex="5" />
+                    <Label text="Insert Data Here" styleClass="medText" GridPane.rowIndex="3" GridPane.columnIndex="6" style="-fx-text-fill: blue;"/>
+
+                    <Label text="Position Long: " styleClass="medText" GridPane.rowIndex="4" GridPane.columnIndex="5" />
+                    <Label text="Insert Data Here" styleClass="medText" GridPane.rowIndex="4" GridPane.columnIndex="6" style="-fx-text-fill: blue;" />
+
+                    <Label text="Position Lat: " styleClass="medText" GridPane.rowIndex="5" GridPane.columnIndex="5" />
+                    <Label text="Insert Data Here" styleClass="medText" GridPane.rowIndex="5" GridPane.columnIndex="6" style="-fx-text-fill: blue;"/>
+
+                    <Label text="Total Trips: " styleClass="medText" GridPane.rowIndex="6" GridPane.columnIndex="5" />
+                    <Label text="Insert Test Data"  styleClass="medText" GridPane.rowIndex="6" GridPane.columnIndex="6" style="-fx-text-fill: blue;"/>
+
+                    <Label text="Total Kilometers: " styleClass="medText" GridPane.rowIndex="7" GridPane.columnIndex="5" />
+                    <Label text="Insert Test Data" styleClass="medText" GridPane.rowIndex="7" GridPane.columnIndex="6" style="-fx-text-fill: blue;"/>
+                </GridPane>
+            </HBox>
+            <HBox visible="false" fx:id="historyPage" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+                <TableView fx:id="historyView" prefWidth="1000">
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                    <columns>
+                        <TableColumn text="Timestamp"/>
+                        <TableColumn text="User id"/>
+                        <TableColumn text="Docking station id"/>
+                        <TableColumn text="Charge (%)"/>
+                        <TableColumn text="Total Trips"/>
+                        <TableColumn text="Total km"/>
+                        <TableColumn text="Pos Long"/>
+                        <TableColumn text="Pos Lat"/>
+                    </columns>
+                </TableView>
+            </HBox>
+            <padding>
+                <Insets bottom="40" />
+            </padding>
+        </AnchorPane>
+    </center>
+</BorderPane>

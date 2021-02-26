@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import app.elements.PaneSwitchButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import app.map.GoogleMapView?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.text.Text?>
+<BorderPane id="sidebar-view" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="app.repair.RepairsController" fx:id="mainPage">
+    <top>
+        <VBox>
+
+            <HBox styleClass="title-bar" alignment="TOP_CENTER">
+                <Label styleClass="title">Repairs</Label>
+            </HBox>
+
+            <HBox styleClass="pane-switch-button-group">
+                <PaneSwitchButton fx:id="addRepairTabButton" styleClass="pane-switch-button" text="Register Repair"/>
+                <PaneSwitchButton fx:id="allRepairsTabButton" styleClass="pane-switch-button" text="All Repairs"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT">
+                <HBox>
+                    <Button text="Back" alignment="CENTER_LEFT" styleClass="medText" fx:id="backButton2" visible="false" />
+                </HBox>
+                <Button text="Back" alignment="CENTER_LEFT" styleClass="medText" fx:id="backButton" visible="false" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <AnchorPane>
+            <HBox fx:id="repairsPane" alignment="CENTER" visible="true" spacing="150" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+                <padding>
+                    <Insets left="0" top="50"/>
+                </padding>
+                <Region prefHeight="400" />
+                <GridPane hgap="50" vgap="40" alignment="CENTER">
+                    <HBox GridPane.columnIndex="0" GridPane.columnSpan="2" alignment="CENTER">
+                        <Label text="Register repair" styleClass="title" />
+                    </HBox>
+                    <Label id="title" text="Request Date" styleClass="medText" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                    <DatePicker fx:id="requestField" GridPane.rowIndex="1" GridPane.columnIndex="1" minWidth="240" prefHeight="40" />
+                    <Label id="title" text="Description" styleClass="medText" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                    <TextField fx:id="reqDescriptionField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                    <Label id="title" text="Bike id" styleClass="medText" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                    <HBox GridPane.rowIndex="3" GridPane.columnIndex="1">
+                        <TextField fx:id="bikeIdField" />
+                        <Button text="Choose" style="-fx-font-size: 16" fx:id="chooseIdButton" onAction="#chooseId"/>
+                    </HBox>
+
+                    <HBox GridPane.rowIndex="5" alignment="CENTER" GridPane.columnIndex="1">
+                        <Button fx:id="regRepairButton" text="Register" styleClass="medText" prefWidth="160" />
+                    </HBox>
+                </GridPane>
+                <Region minWidth="50" HBox.hgrow="NEVER" />
+            </HBox>
+            <HBox fx:id="editRepairs" alignment="CENTER" visible="false" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+                <GridPane hgap="30" vgap="15" alignment="CENTER">
+                    <HBox GridPane.columnIndex="0" GridPane.columnSpan="2" alignment="CENTER">
+                        <Label text="Edit bike / register return" styleClass="title" />
+                    </HBox>
+
+                    <Label id="title" text="Repair id" styleClass="medText"             GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                    <TextField fx:id="repairIdField"                                    GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                    <Label id="title" text="Request date" styleClass="medText"          GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                    <DatePicker fx:id="requestFieldEdit"                                GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                    <Label id="title" text="Request description" styleClass="medText"   GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                    <TextField fx:id="reqDescriptionFieldEdit"                          GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                    <Label id="title" text="Bike ID" styleClass="medText"               GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                    <TextField fx:id="bikeIdFieldEdit"                                  GridPane.rowIndex="4" GridPane.columnIndex="1" />
+                    <Label id="title" text="Return date" styleClass="medText"           GridPane.rowIndex="5" GridPane.columnIndex="0" />
+                    <DatePicker fx:id="returnField"                                     GridPane.rowIndex="5" GridPane.columnIndex="1" />
+                    <Label id="title" text="Return description" styleClass="medText"    GridPane.rowIndex="6" GridPane.columnIndex="0" />
+                    <TextField fx:id="retDescriptionField"                              GridPane.rowIndex="6" GridPane.columnIndex="1" />
+                    <Label id="title" text="Price" styleClass="medText"                 GridPane.rowIndex="7" GridPane.columnIndex="0" />
+                    <TextField fx:id="priceRepairField"                                 GridPane.rowIndex="7" GridPane.columnIndex="1" />
+
+                    <HBox GridPane.rowIndex="10" alignment="CENTER" GridPane.columnIndex="1">
+                        <Button fx:id="retRegisterButton" text="Register" styleClass="medText" prefWidth="160" />
+                    </HBox>
+
+                    <HBox GridPane.rowIndex="10" alignment="CENTER_LEFT" GridPane.columnIndex="0">
+                        <Button fx:id="retReturnButton" text="Back" styleClass="medText" prefWidth="140" />
+                    </HBox>
+                </GridPane>
+            </HBox>
+
+            <HBox alignment="CENTER" fx:id="allRepairs" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" visible="false" spacing="60">
+                <padding>
+                    <Insets top="20" bottom="20" />
+                </padding>
+                <TableView fx:id="repairView" prefWidth="1080" prefHeight="600" >
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                    <columns>
+                        <TableColumn text="Repair ID"/>
+                        <TableColumn text="Bike ID"/>
+                        <TableColumn text="Request Date"/>
+                        <TableColumn text="Request Description"/>
+                        <TableColumn text="Return Date"/>
+                        <TableColumn text="Return Description"/>
+                        <TableColumn text="Price (kr)"/>
+                        <TableColumn text="Edit"/>
+                    </columns>
+                </TableView>
+            </HBox>
+        </AnchorPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import app.elements.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane
+        fx:id="sidebarGridPane"
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        prefHeight="400"
+        prefWidth="210.0"
+        vgap="20">
+
+    <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER">
+        <padding>
+            <Insets top="20" />
+        </padding>
+        <HBox alignment="CENTER" styleClass="sidebar-title-bar">
+            <Label styleClass="sidebar-title">NaNtendo</Label>
+        </HBox>
+        <Region minHeight="20" />
+    </VBox>
+
+    <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="30" alignment="CENTER">
+        <Label text="Administrative Section">
+            <padding>
+                <Insets left="10" />
+            </padding>
+            <font>
+                <Font size="16" />
+            </font>
+        </Label>
+        <padding>
+            <Insets left="10" />
+        </padding>
+        <!--
+        <Button fx:id="dockingStationsButton" onAction="#dockingStationButtonPressed" prefWidth="150" prefHeight="40" text="Docking Stations" />
+        <Button fx:id="usersButton" onAction="#usersButtonPressed" prefWidth="150" prefHeight="40" text="Users" />
+        <Button fx:id="bikesButton" onAction="#bikesButtonPressed" prefWidth="150" prefHeight="40" text="Bikes" />
+        -->
+
+        <VBox styleClass="sidebar-switch-button-group" alignment="CENTER">
+            <PaneSwitchButton fx:id="dockingStationsButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Docking Stations"/>
+            <PaneSwitchButton fx:id="usersButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Users"/>
+            <PaneSwitchButton fx:id="bikesButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Bikes"/>
+            <PaneSwitchButton fx:id="repairsButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Repairs"/>
+            <PaneSwitchButton fx:id="deletedButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Deleted"/>
+        </VBox>
+
+    </VBox>
+    <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" spacing="30">
+        <Region minHeight="50" />
+        <padding>
+            <Insets left="20" />
+        </padding>
+        <Label text="Other">
+            <font>
+                <Font size="16" />
+            </font>
+        </Label>
+
+        <VBox styleClass="sidebar-switch-button-group" alignment="CENTER">
+            <PaneSwitchButton fx:id="statisticsButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Statistics"/>
+            <PaneSwitchButton fx:id="accountButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Account"/>
+        </VBox>
+
+        <VBox>
+            <PaneSwitchButton fx:id="logoutButton" styleClass="sidebar-switch-button" mnemonicParsing="false" text="Log out"/>
+        </VBox>
+
+        <!--
+        <Button fx:id="typeButton" onAction="#typeButtonPressed" text="Bike Types" prefWidth="150" prefHeight="40" />
+        -->
+
+    </VBox>
+</GridPane>
